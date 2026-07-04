@@ -1,0 +1,34 @@
+# Environments
+.env
+.env.*
+.venv
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs and Editors
+.vscode/
+.idea/
+.gemini/
+*.swp
+*.swo
+
+# Caches
+.pytest_cache/
+.mypy_cache/
+
+# Node (in case of a frontend)
+node_modules/
+build/
+dist/
+.next/
+
+# OS generated files
+.DS_Store
+Thumbs.db
