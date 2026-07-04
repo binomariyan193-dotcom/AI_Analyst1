@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { UploadCloud, File, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
-import axios from "axios";
+import { api } from "@/lib/api";
 
 export default function UploadArea({ onUploadSuccess }: { onUploadSuccess: () => void }) {
   const [isDragging, setIsDragging] = useState(false);
@@ -39,8 +39,7 @@ export default function UploadArea({ onUploadSuccess }: { onUploadSuccess: () =>
     formData.append("file", file);
 
     try {
-      const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      await axios.post(`${API_BASE}/api/v1/upload`, formData, {
+      await api.post(`/upload`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setStatus("success");

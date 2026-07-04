@@ -2,8 +2,7 @@ import os
 from typing import List, Dict, Any
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_pinecone import PineconeVectorStore
-from pinecone import Pinecone
+from langchain_qdrant import QdrantVectorStore
 from app.core.config import settings
 
 # Global vector store
@@ -31,14 +30,13 @@ def index_document(text: str) -> bool:
         )
         chunks = text_splitter.split_text(text)
         
-        # Create embeddings and store in Pinecone
+        # Create embeddings and store in Qdrant (in-memory)
         embeddings = get_embeddings()
-        index_name = os.getenv("PINECONE_INDEX_NAME", "ai-analyst")
-        # Pinecone client handles initialization automatically if PINECONE_API_KEY is in env
-        vector_store = PineconeVectorStore.from_texts(
+        vector_store = QdrantVectorStore.from_texts(
             texts=chunks,
             embedding=embeddings,
-            index_name=index_name
+            location=":memory:",
+            collection_name="ai-analyst"
         )
         
         return True
@@ -51,16 +49,7 @@ def query_document(query: str, k: int = 4) -> str:
     global vector_store
     
     if not vector_store:
-        embeddings = get_embeddings()
-        index_name = os.getenv("PINECONE_INDEX_NAME", "ai-analyst")
-        if os.getenv("PINECONE_API_KEY"):
-            try:
-                vector_store = PineconeVectorStore(index_name=index_name, embedding=embeddings)
-            except Exception as e:
-                print(f"Failed to initialize Pinecone vector store: {e}")
-                return "No document has been indexed yet."
-        else:
-            return "No document has been indexed yet."
+        return "No document has been indexed yet."
         
     try:
         # Perform similarity search

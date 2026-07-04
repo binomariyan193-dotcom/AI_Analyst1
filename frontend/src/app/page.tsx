@@ -22,7 +22,7 @@ export default function Home() {
           <Link href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link>
         </nav>
         <Link 
-          href="/dashboard"
+          href="/login"
           className="px-5 py-2.5 rounded-full bg-foreground text-background font-medium hover:scale-105 transition-transform flex items-center gap-2"
         >
           Get Started <ArrowRight className="w-4 h-4" />
@@ -47,7 +47,7 @@ export default function Home() {
         
         <div className="flex flex-col sm:flex-row gap-4">
           <Link 
-            href="/dashboard"
+            href="/login"
             className="px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-lg hover:shadow-[0_0_40px_rgba(79,70,229,0.4)] transition-all hover:-translate-y-1 flex items-center gap-2 justify-center"
           >
             Launch Workspace <ArrowRight className="w-5 h-5" />

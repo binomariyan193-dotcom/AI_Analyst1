@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { useRouter } from "next/navigation";
+import { api } from "@/lib/api";
 import { LayoutDashboard, MessageSquare, Target, Lightbulb, Activity, ArrowLeft } from "lucide-react";
 import UploadArea from "@/components/UploadArea";
 import Link from "next/link";
@@ -18,11 +19,12 @@ export default function Dashboard() {
   const [chatHistory, setChatHistory] = useState<{role: string, content: string}[]>([]);
   const [chatLoading, setChatLoading] = useState(false);
 
+  const router = useRouter();
+
   const fetchDashboard = async () => {
     setLoading(true);
     try {
-      const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const res = await axios.get(`${API_BASE}/api/v1/dashboard`);
+      const res = await api.get(`/dashboard`);
       setData(res.data);
     } catch (error) {
       console.error(error);
@@ -32,8 +34,13 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      router.push("/login");
+      return;
+    }
     fetchDashboard();
-  }, []);
+  }, [router]);
 
   const handleChat = async () => {
     if (!chatQuery.trim()) return;
@@ -44,8 +51,7 @@ export default function Dashboard() {
     setChatLoading(true);
 
     try {
-      const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const res = await axios.post(`${API_BASE}/api/v1/chat`, {
+      const res = await api.post(`/chat`, {
         query: userMsg.content,
         session_id: "test-session"
       });

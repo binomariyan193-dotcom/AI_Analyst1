@@ -32,3 +32,9 @@ dist/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# App Builds
+frontend/out/
+backend/build/
+*.exe
+desktop/dist/

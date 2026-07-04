@@ -19,3 +19,7 @@ langchain_community
 langchain-qdrant
 pinecone-client
 langchain-pinecone
+pyinstaller
+PyJWT
+fastapi-sso
+sqlalchemy
