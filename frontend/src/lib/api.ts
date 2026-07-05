@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+const envUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+// Automatically append /api/v1 if the user only provided the base Render URL
+export const API_URL = envUrl.endsWith('/api/v1') ? envUrl : `${envUrl}/api/v1`;
 
 export const api = axios.create({
   baseURL: API_URL,
