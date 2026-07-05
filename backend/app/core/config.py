@@ -4,7 +4,8 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     PROJECT_NAME: str = "AI Analyst"
     API_V1_STR: str = "/api/v1"
-    FRONTEND_URL: str = os.getenv("FRONTEND_URL", "http://localhost:3000")
+    FRONTEND_URL_RAW: str = os.getenv("FRONTEND_URL", "http://localhost:3000")
+    FRONTEND_URL: str = FRONTEND_URL_RAW.rstrip("/")
     
     # Qdrant
     QDRANT_URL: str = os.getenv("QDRANT_URL", "http://localhost:6333")
