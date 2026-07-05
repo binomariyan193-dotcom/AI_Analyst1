@@ -115,10 +115,11 @@
   }
   body {
     @apply font-sans bg-background text-foreground;
+    background-color: #0c0c0e;
     background-image: 
-      radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.08), transparent 35vw),
-      radial-gradient(circle at 85% 30%, rgba(255, 0, 255, 0.08), transparent 35vw),
-      linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
+      radial-gradient(circle at 20% 30%, rgba(218, 165, 32, 0.05), transparent 45vw),
+      radial-gradient(circle at 80% 70%, rgba(184, 134, 11, 0.05), transparent 45vw),
+      linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
   }
   html {
     @apply font-sans;
@@ -126,19 +127,19 @@
 }
 
 .glass {
-  @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.2)];
+  @apply bg-[#141416]/80 backdrop-blur-2xl border border-white/5 shadow-[0_8px_30px_rgb(0,0,0,0.5)];
 }
 
 .dark .glass {
-  @apply bg-[#05051a]/60 backdrop-blur-xl border-cyan-500/20 shadow-[0_0_20px_rgba(0,240,255,0.05)];
+  @apply bg-[#0f0f12]/70 backdrop-blur-2xl border-amber-500/10 shadow-[0_8px_30px_rgba(0,0,0,0.7)];
 }
 
 .hover-lift {
-  @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(0,240,255,0.2)] hover:border-cyan-500/40;
+  @apply transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(218,165,32,0.1)] hover:border-amber-500/30;
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-yellow-500 to-amber-700;
 }
 
 @theme inline {

@@ -76,18 +76,18 @@ export function LoginForm() {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Card className="border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl shadow-black/40 text-zinc-100 overflow-hidden relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-violet-500/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-amber-700/10 pointer-events-none" />
         
         <CardHeader className="space-y-2 text-center pb-8 pt-8 relative z-10">
           <motion.div
             initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="w-16 h-16 mx-auto bg-gradient-to-tr from-indigo-500 to-violet-500 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/30 mb-4"
+            className="w-16 h-16 mx-auto bg-gradient-to-tr from-amber-400 to-amber-700 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(218,165,32,0.3)] mb-4"
           >
             <div className="w-8 h-8 border-t-2 border-r-2 border-white rounded-full animate-spin" style={{ animationDuration: '3s' }} />
           </motion.div>
-          <CardTitle className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-white to-zinc-400">
+          <CardTitle className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-amber-200 to-amber-600">
             Welcome back
           </CardTitle>
           <CardDescription className="text-zinc-400 text-sm">
@@ -114,7 +114,7 @@ export function LoginForm() {
                 autoComplete="email"
                 autoCorrect="off"
                 disabled={isLoading}
-                className="bg-zinc-900/50 border-zinc-700/50 text-white placeholder:text-zinc-500 h-12 focus-visible:ring-indigo-500 focus-visible:border-indigo-500"
+                className="bg-[#141416]/50 border-white/10 text-white placeholder:text-zinc-500 h-12 focus-visible:ring-amber-500 focus-visible:border-amber-500"
                 required
               />
             </div>
@@ -123,7 +123,7 @@ export function LoginForm() {
                 <label className="text-xs font-medium text-zinc-300 uppercase tracking-wider" htmlFor="password">
                   Password
                 </label>
-                <a href="#" className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
+                <a href="#" className="text-xs text-amber-400 hover:text-amber-300 transition-colors">
                   Forgot password?
                 </a>
               </div>
@@ -133,17 +133,17 @@ export function LoginForm() {
                 placeholder="••••••••"
                 type="password"
                 disabled={isLoading}
-                className="bg-zinc-900/50 border-zinc-700/50 text-white placeholder:text-zinc-500 h-12 focus-visible:ring-indigo-500 focus-visible:border-indigo-500"
+                className="bg-[#141416]/50 border-white/10 text-white placeholder:text-zinc-500 h-12 focus-visible:ring-amber-500 focus-visible:border-amber-500"
                 required
               />
             </div>
             <div className="flex gap-4">
               <Button 
                 type="submit"
-                className="flex-1 h-12 bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/20 transition-all hover:shadow-indigo-500/40 relative overflow-hidden group border-none" 
+                className="flex-1 h-12 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-black font-semibold shadow-[0_0_15px_rgba(218,165,32,0.3)] transition-all hover:shadow-[0_0_25px_rgba(218,165,32,0.5)] relative overflow-hidden group border-none" 
                 disabled={isLoading}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[pulse_2s_ease-in-out_infinite]" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[pulse_2s_ease-in-out_infinite]" />
                 {isLoading ? (
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                 ) : (
@@ -154,7 +154,7 @@ export function LoginForm() {
               <Button 
                 type="button"
                 variant="outline"
-                className="flex-1 h-12 border-zinc-700/50 bg-zinc-900/30 hover:bg-zinc-800 text-zinc-300 transition-all" 
+                className="flex-1 h-12 border-amber-500/30 bg-[#141416]/30 hover:bg-amber-500/10 text-amber-100 transition-all shadow-[0_0_10px_rgba(218,165,32,0.05)] hover:shadow-[0_0_15px_rgba(218,165,32,0.15)]" 
                 disabled={isLoading}
                 onClick={onRegister}
               >
@@ -165,10 +165,10 @@ export function LoginForm() {
           
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-zinc-800" />
+              <span className="w-full border-t border-white/10" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-[#09090b] px-2 text-zinc-500 backdrop-blur-sm rounded-full">
+              <span className="bg-[#0c0c0e] px-2 text-zinc-500 backdrop-blur-sm rounded-full">
                 Or continue with
               </span>
             </div>
@@ -180,7 +180,7 @@ export function LoginForm() {
               type="button" 
               onClick={() => window.location.href = `${API_URL}/auth/google/login`}
               disabled={isLoading} 
-              className="w-full border-zinc-700/50 bg-zinc-900/30 hover:bg-zinc-800 text-zinc-300 h-11"
+              className="w-full border-white/10 bg-[#141416]/30 hover:bg-white/5 text-zinc-300 h-11 transition-all"
             >
               <svg className="mr-2 h-4 w-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
