@@ -81,7 +81,6 @@ export function LoginForm() {
                 name="email"
                 placeholder="name@example.com"
                 type="email"
-                defaultValue="admin@example.com"
                 autoCapitalize="none"
                 autoComplete="email"
                 autoCorrect="off"
@@ -104,7 +103,6 @@ export function LoginForm() {
                 name="password"
                 placeholder="••••••••"
                 type="password"
-                defaultValue="password123"
                 disabled={isLoading}
                 className="bg-zinc-900/50 border-zinc-700/50 text-white placeholder:text-zinc-500 h-12 focus-visible:ring-indigo-500 focus-visible:border-indigo-500"
                 required
