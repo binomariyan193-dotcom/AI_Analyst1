@@ -11,17 +11,19 @@ import os
 
 router = APIRouter()
 
+backend_url = os.getenv("BACKEND_URL", "http://localhost:8000")
+
 google_sso = GoogleSSO(
     client_id=os.getenv("GOOGLE_CLIENT_ID", "your_client_id"),
     client_secret=os.getenv("GOOGLE_CLIENT_SECRET", "your_client_secret"),
-    redirect_uri="http://localhost:8000/api/v1/auth/google/callback",
+    redirect_uri=f"{backend_url}/api/v1/auth/google/callback",
     allow_insecure_http=True,
 )
 
 github_sso = GithubSSO(
     client_id=os.getenv("GITHUB_CLIENT_ID", "your_client_id"),
     client_secret=os.getenv("GITHUB_CLIENT_SECRET", "your_client_secret"),
-    redirect_uri="http://localhost:8000/api/v1/auth/github/callback",
+    redirect_uri=f"{backend_url}/api/v1/auth/github/callback",
     allow_insecure_http=True,
 )
 

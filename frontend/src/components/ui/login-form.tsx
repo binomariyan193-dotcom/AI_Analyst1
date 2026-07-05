@@ -4,7 +4,7 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { Loader2, ArrowRight, Mail } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { api } from "@/lib/api"
+import { api, API_URL } from "@/lib/api"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -140,7 +140,7 @@ export function LoginForm() {
             <Button 
               variant="outline" 
               type="button" 
-              onClick={() => window.location.href = 'http://localhost:8000/api/v1/auth/github/login'}
+              onClick={() => window.location.href = `${API_URL}/auth/github/login`}
               disabled={isLoading} 
               className="border-zinc-700/50 bg-zinc-900/30 hover:bg-zinc-800 text-zinc-300 h-11"
             >
@@ -152,7 +152,7 @@ export function LoginForm() {
             <Button 
               variant="outline" 
               type="button" 
-              onClick={() => window.location.href = 'http://localhost:8000/api/v1/auth/google/login'}
+              onClick={() => window.location.href = `${API_URL}/auth/google/login`}
               disabled={isLoading} 
               className="border-zinc-700/50 bg-zinc-900/30 hover:bg-zinc-800 text-zinc-300 h-11"
             >
