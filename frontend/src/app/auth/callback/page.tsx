@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
-export default function AuthCallback() {
+function AuthCallbackInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -26,5 +26,17 @@ export default function AuthCallback() {
         <p className="text-zinc-400">Please wait while we log you in.</p>
       </div>
     </div>
+  );
+}
+
+export default function AuthCallback() {
+  return (
+    <Suspense fallback={
+      <div className="flex min-h-screen items-center justify-center bg-zinc-950">
+        <Loader2 className="w-12 h-12 text-indigo-500 animate-spin mx-auto" />
+      </div>
+    }>
+      <AuthCallbackInner />
+    </Suspense>
   );
 }
