@@ -40,6 +40,35 @@ export function LoginForm() {
     }
   }
 
+  async function onRegister() {
+    setIsLoading(true)
+    setError(null)
+    
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+    
+    if (!emailInput?.value || !passwordInput?.value) {
+      setError("Please enter both email and password to register.");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const response = await api.post('/auth/register', {
+        email: emailInput.value,
+        password: passwordInput.value
+      });
+      
+      // Save token and redirect
+      localStorage.setItem('access_token', response.data.access_token);
+      router.push("/dashboard");
+    } catch (err: any) {
+      setError(err.response?.data?.detail || "Registration failed. Please try again.");
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -127,7 +156,7 @@ export function LoginForm() {
                 variant="outline"
                 className="flex-1 h-12 border-zinc-700/50 bg-zinc-900/30 hover:bg-zinc-800 text-zinc-300 transition-all" 
                 disabled={isLoading}
-                onClick={() => setError("Registration endpoint is coming soon! For now, use the mock credentials to login.")}
+                onClick={onRegister}
               >
                 Register
               </Button>
