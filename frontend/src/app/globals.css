@@ -115,7 +115,10 @@
   }
   body {
     @apply font-sans bg-background text-foreground;
-    background-image: radial-gradient(circle at top right, rgba(120, 119, 198, 0.1), transparent 400px), radial-gradient(circle at bottom left, rgba(255, 120, 150, 0.05), transparent 400px);
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.08), transparent 35vw),
+      radial-gradient(circle at 85% 30%, rgba(255, 0, 255, 0.08), transparent 35vw),
+      linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
   }
   html {
     @apply font-sans;
@@ -123,19 +126,19 @@
 }
 
 .glass {
-  @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+  @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.2)];
 }
 
 .dark .glass {
-  @apply bg-black/40 border-white/10;
+  @apply bg-[#05051a]/60 backdrop-blur-xl border-cyan-500/20 shadow-[0_0_20px_rgba(0,240,255,0.05)];
 }
 
 .hover-lift {
-  @apply transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg;
+  @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(0,240,255,0.2)] hover:border-cyan-500/40;
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500;
 }
 
 @theme inline {

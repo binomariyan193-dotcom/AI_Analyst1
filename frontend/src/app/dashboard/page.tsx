@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
-import { LayoutDashboard, MessageSquare, Target, Lightbulb, Activity, ArrowLeft } from "lucide-react";
+import { LayoutDashboard, MessageSquare, Target, Lightbulb, Activity, ArrowLeft, LogOut, User as UserIcon } from "lucide-react";
 import UploadArea from "@/components/UploadArea";
 import Link from "next/link";
 import {
@@ -18,6 +18,7 @@ export default function Dashboard() {
   const [chatQuery, setChatQuery] = useState("");
   const [chatHistory, setChatHistory] = useState<{role: string, content: string}[]>([]);
   const [chatLoading, setChatLoading] = useState(false);
+  const [userEmail, setUserEmail] = useState<string>("User");
 
   const router = useRouter();
 
@@ -39,8 +40,27 @@ export default function Dashboard() {
       router.push("/login");
       return;
     }
+    
+    // Decode JWT to get user email (subject)
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      const decoded = JSON.parse(jsonPayload);
+      if (decoded.sub) setUserEmail(decoded.sub);
+    } catch (e) {
+      console.error("Failed to decode token");
+    }
+
     fetchDashboard();
   }, [router]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    router.push("/login");
+  };
 
   const handleChat = async () => {
     if (!chatQuery.trim()) return;
@@ -129,12 +149,29 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto">
         <header className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
-            <Link href="/" className="p-2 glass rounded-full hover:bg-white/10 transition-colors">
+            <Link href="/" className="p-2 glass rounded-full hover:bg-cyan-500/10 transition-colors border border-cyan-500/20 text-cyan-400">
               <ArrowLeft className="w-5 h-5" />
             </Link>
-            <h1 className="text-3xl font-bold flex items-center gap-3">
-              <LayoutDashboard className="text-blue-500" /> AI Dashboard
+            <h1 className="text-3xl font-bold flex items-center gap-3 text-zinc-100">
+              <LayoutDashboard className="text-cyan-400" /> AI Dashboard
             </h1>
+          </div>
+          
+          {/* User Profile & Logout */}
+          <div className="flex items-center gap-4 glass px-4 py-2 rounded-full border-cyan-500/20 shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+            <div className="flex items-center gap-2 pr-4 border-r border-white/10">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center text-white font-bold">
+                <UserIcon className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-medium text-zinc-200 hidden md:block">{userEmail}</span>
+            </div>
+            <button 
+              onClick={handleLogout}
+              className="text-zinc-400 hover:text-fuchsia-400 transition-colors flex items-center gap-2 text-sm font-medium"
+            >
+              <LogOut className="w-4 h-4" />
+              <span className="hidden md:block">Logout</span>
+            </button>
           </div>
         </header>
 
@@ -215,8 +252,8 @@ export default function Dashboard() {
           {/* Sidebar Chat Agent */}
           <div className="lg:col-span-1 h-[800px]">
             <div className="glass rounded-2xl h-full flex flex-col border border-white/10 sticky top-8">
-              <div className="p-4 border-b border-white/10 bg-black/20 rounded-t-2xl flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
+              <div className="p-4 border-b border-cyan-500/20 bg-black/40 rounded-t-2xl flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-fuchsia-500 flex items-center justify-center shadow-[0_0_10px_rgba(0,240,255,0.5)]">
                   <MessageSquare className="text-white w-5 h-5" />
                 </div>
                 <div>
